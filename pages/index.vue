@@ -22,24 +22,32 @@ export default {
       ticket: []
     }
   },
-  methods: {
-    addItem(item) {
-      this.items.push(item)
-    },
-    addTicket(item) {
-      this.ticket.push(item)
-    },
-    delTicket(item) {
-      let salir = false
-      this.ticket.forEach((it, index) => {
-        if (!salir) {
-          if (it === item) {
-            this.ticket.splice(index, 1)
-            salir = true
+    methods: {
+      addItem(item)
+      {
+        this.items.push(item)
+      }
+    ,
+      addTicket(item)
+      {
+
+        this.ticket.push(item)
+
+
+      }
+    ,
+      delTicket(item)
+      {
+        let salir = false
+        this.ticket.forEach((it, index) => {
+          if (!salir) {
+            if (it === item) {
+              this.ticket.splice(index, 1)
+              salir = true
+            }
           }
-        }
-      })
+        })
+      }
     }
   }
-}
 </script>

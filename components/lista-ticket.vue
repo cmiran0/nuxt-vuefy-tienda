@@ -1,6 +1,8 @@
 <template>
   <div>
     <br>
+    <v-btn v-on:click="tipoTicket">{{ detallado }}</v-btn>
+
     <v-card
       class="mx-auto2"
       tile
@@ -21,6 +23,9 @@
       </v-list>
     </v-card>
     <br>
+
+    <br>
+    <br>
     <v-btn @click="pagar()">TOTAL:{{ total }}</v-btn>
   </div>
 
@@ -31,6 +36,11 @@
 export default {
   name: "lista-ticket",
   props: ['ticket'],
+  data() {
+    return {
+      detallado: true
+    }
+  },
   computed: {
     total() {
       let total = 0
@@ -42,7 +52,10 @@ export default {
   },
   methods: {
     pagar() {
-      alert('Tienes que pagar '+this.total+' .eur')
+      alert('Tienes que pagar ' + this.total + ' .eur')
+    },
+    tipoTicket() {
+      this.detallado = false
     }
   }
 }

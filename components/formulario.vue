@@ -6,8 +6,8 @@
       hide-details="auto"
     ></v-text-field>
     <v-text-field v-model="pvp" label="Importe"></v-text-field>
-    <v-btn @click="addItem"> ADD</v-btn>
 
+    <v-btn @click="addItem"> ADD</v-btn>
 
 
   </div>
@@ -20,18 +20,21 @@ export default {
     return {
       id: 0,
       name: null,
-      pvp: null,
+      pvp: null
+
     }
   },
   methods: {
-    addItem: function () {
+    addItem() {
       let item = {}
       item.name = this.name
       item.pvp = this.pvp
       item.id = ++this.id + 'pr'
+
       this.$emit('subir-producto', item)
       this.name = null
       this.pvp = null
+
     }
 
   }
