@@ -1,7 +1,7 @@
 <template>
   <div>
+
     <br>
-    <v-btn v-on:click="tipoTicket">{{ detallado }}</v-btn>
 
     <v-card
       class="mx-auto2"
@@ -17,6 +17,8 @@
             <v-list-item-content>
               <v-list-item-title v-text="item.name"></v-list-item-title>
               <v-list-item-subtitle v-text="item.pvp"></v-list-item-subtitle>
+              <v-list-item-subtitle v-text="item.cantidad" v-if="!detallado"></v-list-item-subtitle>
+              <v-list-item-subtitle v-text="item.total" v-if="!detallado"></v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </v-list-item-group>
@@ -35,17 +37,15 @@
 <script>
 export default {
   name: "lista-ticket",
-  props: ['ticket'],
+  props: ['ticket', 'detallado'],
   data() {
-    return {
-      detallado: true
-    }
+    return {}
   },
   computed: {
     total() {
       let total = 0
       this.ticket.forEach((item) => {
-        total += parseInt(item.pvp)
+        total += parseInt(item.total)
       })
       return total
     }
@@ -53,14 +53,10 @@ export default {
   methods: {
     pagar() {
       alert('Tienes que pagar ' + this.total + ' .eur')
-    },
-    tipoTicket() {
-      this.detallado = false
     }
   }
 }
 </script>
 
 <style scoped>
-
 </style>
