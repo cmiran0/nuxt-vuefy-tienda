@@ -3,11 +3,8 @@
     <formulario @subir-producto='addItem'></formulario>
     <lista-productos :items="items" @subir-producto-ticket='addTicket'
                      @borrar-producto-ticket='delTicket'></lista-productos>
-    <v-checkbox
-      v-model="detallado"
-      :label="detallado?'detallado':'no detallada'"
-    ></v-checkbox>
-    <lista-ticket :detallado="detallado" :ticket="ticket"></lista-ticket>
+    <v-checkbox v-model="detallado" :label="detallado?'detallado':'no detallada'"></v-checkbox>
+    <lista-ticket :detallado="detallado" :ticket="ticket" v-model="mostrarTipoTicket"></lista-ticket>
   </div>
 </template>
 
@@ -22,9 +19,36 @@ export default {
   data() {
     return {
       detallado: false,
-      items: [{id: 1, name: 'manzana', pvp: 10},
-        {id: 2, name: 'pera', pvp: 8}],
+      items: [
+        {id: 1, name: 'manzana', pvp: 5},
+        {id: 2, name: 'pera', pvp: 10},
+        {id: 3, name: 'tomate', pvp: 15},
+        {id: 4, name: 'pepino', pvp: 12},
+        {id: 5, name: 'piña', pvp: 13}],
       ticket: []
+    }
+  },
+  computed: {
+    mostrarTipoTicket() {
+      let ticketAux = this.ticket;
+      this.ticket = []
+      if (this.detallado) {
+
+        for (let i = 0; i < ticketAux.length; i++) {
+          let cont = ticketAux[i].cantidad;
+          for (let j = 0; j < cont; j++) {
+            ticketAux[i].cantidad = 1
+            this.ticket.push(ticketAux[i])
+          }
+        }
+      } else {
+        /*for (let i = 0; i < ticketAux.length; i++) {
+
+        }*/
+
+
+      }
+
     }
   },
   methods: {
@@ -39,7 +63,6 @@ export default {
       let salir = false
       this.ticket.forEach((i) => {
         if (item.id === i.id) {
-          console.log("++Hay un objeto " + i.name)
           i.cantidad = i.cantidad + 1
           i.total = i.pvp * i.cantidad
           salir = true
@@ -52,8 +75,6 @@ export default {
         itemTicket.pvp = item.pvp
         itemTicket.id = item.id
         itemTicket.total = item.pvp
-        console.log("Crea objeto " + itemTicket.name)
-
         this.ticket.push(itemTicket)
       }
     },
@@ -93,6 +114,15 @@ export default {
           }
         }
       })
+    },
+
+
+    removeItemFromArr ( arr, item ) {
+      var i = arr.indexOf( item );
+
+      if ( i !== -1 ) {
+        arr.splice( i, 1 );
+      }
     }
   }
 }

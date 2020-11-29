@@ -33,7 +33,7 @@ export default {
   props: ['items'],
   data: function () {
     return {
-      id: 2,
+      id: 5,
       name: null,
       pvp: null,
     }
