@@ -1,10 +1,21 @@
 <template>
   <div>
-    <formulario @subir-producto='addItem'></formulario>
-    <lista-productos :items="items" @subir-producto-ticket='addTicket'
-                     @borrar-producto-ticket='delTicket'></lista-productos>
-    <v-checkbox v-model="detallado" :label="detallado?'detallado':'no detallada'"></v-checkbox>
-    <lista-ticket :detallado="detallado" :ticket="ticket"></lista-ticket>
+    <v-container>
+      <formulario @subir-producto='addItem'></formulario>
+    </v-container>
+
+    <v-container>
+      <v-row>
+        <v-col>
+          <lista-productos :items="items" @subir-producto-ticket='addTicket'
+                           @borrar-producto-ticket='delTicket'></lista-productos>
+        </v-col>
+        <v-col>
+          <v-checkbox v-model="detallado" :label="detallado?'detallado':'no detallado'"></v-checkbox>
+          <lista-ticket :detallado="detallado" :ticket="ticket"></lista-ticket>
+        </v-col>
+      </v-row>
+    </v-container>
 
 
   </div>
