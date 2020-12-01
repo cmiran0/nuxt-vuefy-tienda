@@ -1,24 +1,27 @@
 <template>
-  <div>
-    <v-container>
-      <formulario @subir-producto='addItem'></formulario>
-    </v-container>
 
-    <v-container>
-      <v-row>
-        <v-col>
-          <lista-productos :items="items" @subir-producto-ticket='addTicket'
-                           @borrar-producto-ticket='delTicket'></lista-productos>
-        </v-col>
-        <v-col>
-          <v-checkbox v-model="detallado" :label="detallado?'detallado':'no detallado'"></v-checkbox>
-          <lista-ticket :detallado="detallado" :ticket="ticket"></lista-ticket>
-        </v-col>
-      </v-row>
-    </v-container>
+  <v-container >
+    <v-row >
+      <v-col>
+        <formulario @subir-producto='addItem'></formulario>
+      </v-col>
+    </v-row>
+
+    <v-row>
+      <v-col>
+        <lista-productos :items="items" @subir-producto-ticket='addTicket'
+                         @borrar-producto-ticket='delTicket'></lista-productos>
+      </v-col>
+      <v-col>
+        <lista-ticket :detallado="detallado" :ticket="ticket"></lista-ticket>
+        <v-checkbox v-model="detallado" :label="detallado?'detallado':'no detallado'"></v-checkbox>
+      </v-col>
+
+    </v-row>
+
+  </v-container>
 
 
-  </div>
 </template>
 
 <script>
@@ -29,7 +32,17 @@ import ListaTicket from "~/components/lista-ticket";
 
 export default {
   components: {ListaTicket, ListaProductos, Formulario},
+
   computed: {
+    height () {
+      switch (this.$vuetify.breakpoint.name) {
+        case 'xs': return 220
+        case 'sm': return 400
+        case 'md': return 500
+        case 'lg': return 600
+        case 'xl': return 800
+      }
+    },
     ticket() {
       if (this.detallado) {
         return this.ticketDetallado
@@ -43,11 +56,11 @@ export default {
     return {
       detallado: false,
       items: [
-        {id: 1, name: 'manzana', pvp: 5},
-        {id: 2, name: 'pera', pvp: 10},
-        {id: 3, name: 'tomate', pvp: 15},
-        {id: 4, name: 'pepino', pvp: 12},
-        {id: 5, name: 'piña', pvp: 13}],
+        {id: '1pr', name: 'Manzana', pvp: 1.25, descripcion: 'Golden apple', impuesto: 21},
+        {id: '2pr', name: 'Pera', pvp: 1.16, descripcion: 'Golden pear', impuesto: 21},
+        {id: '3pr', name: 'Tomate', pvp: 2.15, descripcion: 'Golden tomato', impuesto: 21},
+        {id: '4pr', name: 'Pepino', pvp: 3.14, descripcion: 'Golden pepino', impuesto: 21},
+        {id: '5pr', name: 'Piña', pvp: 3.54, descripcion: 'Golden pineapple', impuesto: 21}],
       ticketDetallado: [],
       ticketNoDetallado: []
     }
@@ -77,6 +90,7 @@ export default {
         itemTicket.name = item.name
         itemTicket.pvp = item.pvp
         itemTicket.id = item.id
+        itemTicket.impuesto = item.impuesto
         itemTicket.total = item.pvp
         this.ticketNoDetallado.push(itemTicket)
       }
