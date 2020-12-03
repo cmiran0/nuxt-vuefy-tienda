@@ -1,18 +1,18 @@
 <template>
 
-  <v-container >
-    <v-row >
+  <v-container>
+    <v-row>
       <v-col>
         <formulario @subir-producto='addItem'></formulario>
       </v-col>
     </v-row>
 
     <v-row>
-      <v-col>
+      <v-col cols="12" sm="6">
         <lista-productos :items="items" @subir-producto-ticket='addTicket'
                          @borrar-producto-ticket='delTicket'></lista-productos>
       </v-col>
-      <v-col>
+      <v-col cols="12" sm="6">
         <lista-ticket :detallado="detallado" :ticket="ticket"></lista-ticket>
         <v-checkbox v-model="detallado" :label="detallado?'detallado':'no detallado'"></v-checkbox>
       </v-col>
@@ -34,15 +34,6 @@ export default {
   components: {ListaTicket, ListaProductos, Formulario},
 
   computed: {
-    height () {
-      switch (this.$vuetify.breakpoint.name) {
-        case 'xs': return 220
-        case 'sm': return 400
-        case 'md': return 500
-        case 'lg': return 600
-        case 'xl': return 800
-      }
-    },
     ticket() {
       if (this.detallado) {
         return this.ticketDetallado
@@ -80,7 +71,7 @@ export default {
       this.ticketNoDetallado.forEach((i) => {
         if (item.id === i.id) {
           i.cantidad = i.cantidad + 1
-          i.total = i.pvp * i.cantidad
+          i.total = (i.pvp * i.cantidad).toFixed(2)
           salir = true
         }
       })

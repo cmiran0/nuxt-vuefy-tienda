@@ -1,18 +1,55 @@
 <template>
 
-  <div>
-    <v-col>
+  <v-form v-model="valid">
+    <v-container>
       <v-row>
-        <v-text-field v-model="name" label="Producto nuevo" hide-details="auto"></v-text-field>
-        <v-text-field v-model="descripcion" label="Descripción" hide-details="auto"></v-text-field>
-        <v-text-field v-model="pvp" label="pvp" hide-details="auto"></v-text-field>
-        <v-text-field v-model="impuesto" label="Imp" hide-details="auto"></v-text-field>
+        <v-col cols="12" md="4">
+          <v-text-field
+            v-model="name"
+            :rules="nameRules"
+            :counter="10"
+            label="Nombre"
+            required
+          ></v-text-field>
+        </v-col>
+
+        <v-col cols="12" md="4">
+          <v-text-field
+            v-model="descripcion"
+            :rules="nameRules"
+            :counter="10"
+            label="Descripción"
+            required
+          ></v-text-field>
+        </v-col>
+        <v-col cols="12" md="4">
+          <v-text-field
+            v-model="pvp"
+            :rules="nameRules"
+            :counter="10"
+            label="pvp"
+            required
+          ></v-text-field>
+        </v-col>
+        <v-col cols="12" md="4">
+          <v-text-field
+            v-model="impuesto"
+            :rules="nameRules"
+            :counter="10"
+            label="Last name"
+            required
+          ></v-text-field>
+        </v-col>
+
+        <v-col cols="12" md="4">
+          <v-btn @click="addItem"> ADD</v-btn>
+        </v-col>
       </v-row>
-    </v-col>
-    <v-col>
-      <v-btn @click="addItem"> ADD</v-btn>
-    </v-col>
-  </div>
+
+    </v-container>
+  </v-form>
+
+
 </template>
 
 <script>
@@ -20,11 +57,16 @@ export default {
   name: "formulario",
   data() {
     return {
+      valid: false,
       id: 0,
       name: null,
       descripcion: null,
       pvp: null,
-      impuesto: null
+      impuesto: null,
+      nameRules: [
+        v => !!v || 'Name is required',
+        //console.log(this.valid)
+      ]
 
     }
   },

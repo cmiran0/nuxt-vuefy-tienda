@@ -31,7 +31,7 @@
 
 
     </v-list-item-content>
-    <v-btn @click="pagar()">TOTAL:{{ total }}</v-btn>
+    <v-btn @click="pagar()">COMPRAR: {{ total }}</v-btn>
   </div>
 </template>
 
@@ -43,7 +43,6 @@ export default {
     total() {
       let total = 0
       this.ticket.forEach((item) => {
-
         total += parseFloat(item.total)
       })
       return total
@@ -55,7 +54,7 @@ export default {
         let total = parseFloat(item.total)
         suma += total - (total * imp / 100)
       })
-      return suma
+      return suma.toFixed(2)
     },
   },
   methods: {
