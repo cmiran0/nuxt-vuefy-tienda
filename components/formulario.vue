@@ -53,12 +53,20 @@
 </template>
 
 <script>
+
 export default {
   name: "formulario",
+  mounted() {
+    this.$axios.get('/productos')
+      .then(response => (
+        this.id = response.data.length
+      ))
+
+  },
   data() {
     return {
       valid: true,
-      id: 0,
+      id: null,
       name: null,
       descripcion: null,
       pvp: null,
@@ -78,7 +86,6 @@ export default {
       if (this.valid) {
         this.$emit('subir-producto', item)
       }
-
 
       this.name = null
       this.pvp = null

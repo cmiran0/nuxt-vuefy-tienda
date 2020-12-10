@@ -1,7 +1,7 @@
 <template>
 
   <v-container>
-    {{ info }}
+
     <v-row>
       <v-col>
         <formulario @subir-producto='addItem'></formulario>
@@ -50,21 +50,27 @@ export default {
     this.$axios.get('/productos')
       .then(response => (
         this.items = response.data
-
       ))
+
   },
   data() {
     return {
       detallado: false,
       items: null,
       ticketDetallado: [],
-      ticketNoDetallado: [],
-      info: null
+      ticketNoDetallado: []
+
     }
   },
   methods: {
     addItem(item) {
-      this.items.push(item)
+      this.$axios.post('/productos', item).then(
+        response => {
+          this.items.push(item)
+        }
+      )
+
+
     },
 
     addTicket(item) {

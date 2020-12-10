@@ -2,7 +2,7 @@
 
 
   <div>
-{{items}}
+
     <v-card class="mx-auto" tile>
       <v-card-title>LISTA PRODUCTOS</v-card-title>
       <v-card-subtitle>* imp incluidos</v-card-subtitle>
