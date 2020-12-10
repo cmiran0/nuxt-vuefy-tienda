@@ -6,7 +6,7 @@
         <v-col cols="12" md="4">
           <v-text-field
             v-model="name"
-            :rules="nameRules"
+
             :counter="10"
             label="Nombre"
             required
@@ -16,7 +16,7 @@
         <v-col cols="12" md="4">
           <v-text-field
             v-model="descripcion"
-            :rules="nameRules"
+
             :counter="10"
             label="Descripción"
             required
@@ -25,7 +25,7 @@
         <v-col cols="12" md="4">
           <v-text-field
             v-model="pvp"
-            :rules="nameRules"
+
             :counter="10"
             label="pvp"
             required
@@ -34,9 +34,9 @@
         <v-col cols="12" md="4">
           <v-text-field
             v-model="impuesto"
-            :rules="nameRules"
+
             :counter="10"
-            label="Last name"
+            label="Imp."
             required
           ></v-text-field>
         </v-col>
@@ -57,16 +57,12 @@ export default {
   name: "formulario",
   data() {
     return {
-      valid: false,
+      valid: true,
       id: 0,
       name: null,
       descripcion: null,
       pvp: null,
-      impuesto: null,
-      nameRules: [
-        v => !!v || 'Name is required',
-        //console.log(this.valid)
-      ]
+      impuesto: null
 
     }
   },
@@ -79,16 +75,15 @@ export default {
       item.impuesto = this.impuesto
       item.pvp = parseFloat(this.pvp) + parseFloat((this.pvp * this.impuesto / 100))
 
-
-      this.$emit('subir-producto', item)
+      if (this.valid) {
+        this.$emit('subir-producto', item)
+      }
 
 
       this.name = null
       this.pvp = null
       this.descripcion = null
-      this.importe = null
       this.impuesto = null
-
     }
 
   }

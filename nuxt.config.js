@@ -1,4 +1,5 @@
 import colors from 'vuetify/es5/util/colors'
+const url = 'https://miranda.josemanuelmunoz.com'
 
 export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
@@ -39,7 +40,9 @@ export default {
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
-  axios: {},
+  axios: {
+    baseURL: url
+  },
 
   // Vuetify module configuration (https://go.nuxtjs.dev/config-vuetify)
   vuetify: {

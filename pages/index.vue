@@ -1,6 +1,7 @@
 <template>
 
   <v-container>
+    {{ info }}
     <v-row>
       <v-col>
         <formulario @subir-producto='addItem'></formulario>
@@ -19,6 +20,7 @@
 
     </v-row>
 
+
   </v-container>
 
 
@@ -29,6 +31,7 @@
 import Formulario from "~/components/formulario";
 import ListaProductos from "~/components/lista-productos";
 import ListaTicket from "~/components/lista-ticket";
+
 
 export default {
   components: {ListaTicket, ListaProductos, Formulario},
@@ -43,17 +46,20 @@ export default {
     }
 
   },
+  mounted() {
+    this.$axios.get('/productos')
+      .then(response => (
+        this.items = response.data
+
+      ))
+  },
   data() {
     return {
       detallado: false,
-      items: [
-        {id: '1pr', name: 'Manzana', pvp: 1.25, descripcion: 'Golden apple', impuesto: 21},
-        {id: '2pr', name: 'Pera', pvp: 1.16, descripcion: 'Golden pear', impuesto: 21},
-        {id: '3pr', name: 'Tomate', pvp: 2.15, descripcion: 'Golden tomato', impuesto: 21},
-        {id: '4pr', name: 'Pepino', pvp: 3.14, descripcion: 'Golden pepino', impuesto: 21},
-        {id: '5pr', name: 'Piña', pvp: 3.54, descripcion: 'Golden pineapple', impuesto: 21}],
+      items: null,
       ticketDetallado: [],
-      ticketNoDetallado: []
+      ticketNoDetallado: [],
+      info: null
     }
   },
   methods: {
